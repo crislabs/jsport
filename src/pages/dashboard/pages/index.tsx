@@ -1,6 +1,6 @@
 import { GridPages0 } from '@/components/grid/ListPages0'
 import LayoutDashboard from '@/layouts/HeaderDashboard'
-import { getPortfolioGetPages0WithCursor } from '@/lib/pages/page0/read'
+import { getPortfolioPages0WithCursor } from '@/lib/pages/page0/read'
 import { PaginationProvider } from '@/providers/PaginationContext'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { GetStaticProps } from 'next'
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
   await queryClient.prefetchQuery(
     ["portfolio-get-pages0-with-cursor", { first: 256 }, process.env.NEXT_PUBLIC_SITE_URL as string],
     async () =>
-    getPortfolioGetPages0WithCursor(
+    getPortfolioPages0WithCursor(
         { first: 256 },
         process.env.NEXT_PUBLIC_SITE_URL as string
       )

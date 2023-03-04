@@ -1,10 +1,12 @@
 import { GridArticles1 } from '@/components/grid/ListArticles1'
 import { GridPages0 } from '@/components/grid/ListPages0'
+import { GridPages1 } from '@/components/grid/ListPages1'
 import { useGetPage0 } from '@/hooks/usePages0'
 // import { Page } from '@/interfaces/page'
 import LayoutDashboard from '@/layouts/HeaderDashboard'
 import { getPortfolioArticlesWithCursorByParentId } from '@/lib/articles/read'
-import { getPortfolioGetPage0, getPortfolioGetPages0WithCursor, getPortfolioPages0BySiteId } from '@/lib/pages/page0/read'
+import { getPortfolioPage0, getPortfolioPages0BySiteId } from '@/lib/pages/page0/read'
+import { getPortfolioGetPages1WithCursor } from '@/lib/pages/page1/read'
 import { PaginationProvider } from '@/providers/PaginationContext'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { GetStaticProps } from 'next'
@@ -31,7 +33,7 @@ export default function Page() {
       }
       {
         data?.data.type.slug === 'category' &&
-        <div>Category</div>
+        <GridPages1 id={query.id as string} page={data}/>
       }
       {
         data?.data.type.slug === 'contact' &&
@@ -69,13 +71,17 @@ export const getStaticProps: GetStaticProps = async (props) => {
   await queryClient.prefetchQuery(
     ["portfolio-get-page0", params?.id as string],
     async () =>
-    getPortfolioGetPage0(params?.id as string)
+    getPortfolioPage0(params?.id as string)
   );
-
   await queryClient.prefetchQuery(
     ["portfolio-get-articles1-with-cursor", {first: 256} , params?.id as string],
     async () =>
     getPortfolioArticlesWithCursorByParentId( {first: 256}, params?.id as string)
+  );
+  await queryClient.prefetchQuery(
+    ["portfolio-get-pages1-with-cursor", {first: 256} , params?.id as string],
+    async () =>
+    getPortfolioGetPages1WithCursor( {first: 256}, params?.id as string)
   );
   return {
     props: {

@@ -1,9 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import Layout from '@/layouts/HeaderLayout'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Page() {
   return (
@@ -14,9 +10,17 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        Hola
-      </div>
+      <section>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 text-center items-center'>
+          <div>
+          <h1 className="mb-6 text-4xl font-extrabold leading-none tracking-normal  md:text-6xl md:tracking-tight">
+      Hello, my name is <span className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 lg:inline">Jesus Calamani</span>
+    </h1>
+            <p className="text-3xl">I am a Creative Developer who is currently based in Portland, Oregon.</p>
+          </div>
+          <img src='https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png' alt='pikachu' />
+        </div>
+      </section>
       {/* <main className={styles.main}>
         
       </main> */}

@@ -2,12 +2,13 @@ import { createPortfolioPage0 } from "@/lib/pages/page0/create";
 import { portfolioDeletePages0 } from "@/lib/pages/page0/delete";
 import { createPortfolioPage1 } from "@/lib/pages/page1/create";
 import { portfolioDeletePages1 } from "@/lib/pages/page1/delete";
+import { getPortfolioGetPages1WithCursor } from "@/lib/pages/page1/read";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 import { Error } from "../interfaces/error";
-import { CreatePage } from "../interfaces/page";
+import { CreatePage, ListPage } from "../interfaces/page";
 import { useSelection } from "../providers/SelectionContext";
 import { useUI } from "../providers/UIprovider";
 import { SwalMessage, SwalMessageError } from "../utils";
@@ -69,4 +70,11 @@ export const useDeletePage1 = () => {
       },
     }
   );
+}
+
+export const useGetPage1WithCursor = (id: string) => {
+  return useQuery<ListPage>({
+    queryKey: ['portfolio-get-pages1-with-cursor', {first: 256}, id],
+    queryFn: () => getPortfolioGetPages1WithCursor( {first: 256}, id),
+  });
 }

@@ -1,7 +1,6 @@
 
 import { useGetArticles } from '@/hooks/useArticles1';
 import { Page } from '@/interfaces/page';
-import { getPortfolioGetPage0, getPortfolioGetPages0WithCursor } from '@/lib/pages/page0/read';
 import { SelectionProvider } from '@/providers/SelectionContext';
 
 import { useQuery } from '@tanstack/react-query';

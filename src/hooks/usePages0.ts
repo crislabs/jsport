@@ -1,13 +1,13 @@
 import { createPortfolioPage0 } from "@/lib/pages/page0/create";
 import { portfolioDeletePages0 } from "@/lib/pages/page0/delete";
-import { getPortfolioGetPage0 } from "@/lib/pages/page0/read";
+import { getPortfolioPage0, getPortfolioPage0BySlug, getPortfolioPages0WithCursor } from "@/lib/pages/page0/read";
 import { updatePortfolioPage0 } from "@/lib/pages/page0/update";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 import { Error } from "../interfaces/error";
-import { CreatePage, Page, UpdatePage } from "../interfaces/page";
+import { CreatePage, ListPage, Page, UpdatePage } from "../interfaces/page";
 import { useSelection } from "../providers/SelectionContext";
 import { useUI } from "../providers/UIprovider";
 import { SwalMessage, SwalMessageError } from "../utils";
@@ -60,7 +60,20 @@ export const useUpdatePage0 = () => {
 export const useGetPage0 = (id: string) => {
   return useQuery<Page>({
     queryKey: ['portfolio-get-page0', id],
-    queryFn: () => getPortfolioGetPage0( id )
+    queryFn: () => getPortfolioPage0( id )
+  });
+}
+export const useGetPage0BySlug = (slug: string) => {
+  return useQuery<Page>({
+    queryKey: ['portfolio-get-page0-by-slug', slug],
+    queryFn: () => getPortfolioPage0BySlug( slug, process.env.NEXT_PUBLIC_SITE_URL as string)
+  });
+}
+
+export const useGetPage0WithCursor = () => {
+  return useQuery<ListPage>({
+    queryKey: ['portfolio-get-pages0-with-cursor', {first: 256}, process.env.NEXT_PUBLIC_SITE_URL as string],
+    queryFn: () => getPortfolioPages0WithCursor( {first: 256}, process.env.NEXT_PUBLIC_SITE_URL as string),
   });
 }
 

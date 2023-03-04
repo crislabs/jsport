@@ -1,6 +1,6 @@
 import { ConnectionArgs } from "@/interfaces/site";
 
-export const getPortfolioGetPage0 = async (id: string) => {
+export const getPortfolioPage0 = async (id: string) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND_URL}/graphql`,
   {
     method: 'POST',
@@ -30,7 +30,7 @@ export const getPortfolioGetPage0 = async (id: string) => {
   const { data: {portfolioGetPage0} } = await response.json();
   return  portfolioGetPage0
 }
-export const getPortfolioGetPages0WithCursor = async (args: ConnectionArgs, parentId: string) => {
+export const getPortfolioPages0WithCursor = async (args: ConnectionArgs, parentId: string) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND_URL}/graphql`,
   {
     method: 'POST',
@@ -124,6 +124,7 @@ export const getPortfolioPages0BySiteId = async (siteId: string) => {
       query PortfolioGetPages0BySiteId($siteId: String!){
         portfolioGetPages0BySiteId(siteId: $siteId){
           _id
+          slug
         }
       }
         `,

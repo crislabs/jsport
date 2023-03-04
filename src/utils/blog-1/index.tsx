@@ -7,7 +7,8 @@ import {
   getPortfolioArticlesBySiteId,
   getPortfolioArticlesWithCursorBySiteId,
 } from "@/lib/articles/read";
-import GridArticles from "@/components/grid/ListArticles";
+import GridArticles from "@/components/grid/GridArticles";
+// import GridArticles from "@/components/grid/ListArticles";
 
 export default function Page() {
   return (
@@ -19,6 +20,7 @@ export default function Page() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GridArticles />
+      
     </>
   );
 }

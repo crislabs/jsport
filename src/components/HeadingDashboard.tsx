@@ -76,6 +76,10 @@ export function HeadingDashboard(props: Props) {
       toggleSlideOversForm.actions.toggle();
       setChildrens(<FormArticle />);
     }
+    if (page?.data.type.slug === 'category') {
+      toggleSlideOversForm.actions.toggle();
+      setChildrens(<FormPage />);
+    }
     if (article) {
       toggleModal.actions.toggle()
     }
@@ -131,6 +135,9 @@ export function HeadingDashboard(props: Props) {
                   {path.length === 2 && 'Add Page'}
                   {
                     page?.data.type.slug === 'blog' && 'Add Article'
+                  }
+                  {
+                    page?.data.type.slug === 'category' && 'Add Category'
                   }
                   {
                     path[1] === 'articles' && 'Add Image'
